@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Upload Results</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  	<script type="text/javascript" src="java.js"></script>
+</head>
+<body>
+<script>
+	var eventid,firstprize;
+	$(document).ready(function()
+		{
+			$.get('http://moodi.org/api/events',function(data){
+				//console.log("yo");
+				for (var i = 0; i < data.data.length; i++) 	
+				{
+					$('#eventdrop').append('<option value='+data.data[i].event_id+'>'+data.data[i].event_name+'</option>');
+					console.log(data.data[i].event_name);
+				}
+			});
+			$('#submit').click(function(){
+				eventid = $("#eventdrop option:selected").val();
+				firstprize = $("#first").val();
+				secondprize = $("#second").val();
+				thirdprize = $("#third").val();
+				var send_data = "eventid="+eventid+"&firstprize="+firstprize+"&secondprize="+secondprize+"&thirdprize="+thirdprize;
+				$.post("/addprizes",send_data,function(data){
+					console.log(data);
+				})
+			})
+		});
+</script>
+	<select id= "eventdrop">
+		<option value = 0>Event Name</option>	
+	</select>
+
+	<input type="text" id = "first">
+	<input type="text" id = "second">
+	<input type="text" id = "third">
+	<br>
+	<button id = "submit">Submit</button>
+</body>
+</html>
