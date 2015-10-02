@@ -82,8 +82,8 @@ app.post('/addprizes',function(req,res){
 				console.log(err);
 				data["errorcode"] = 3;
 				data["error"] = err.code;
-				res.json(data);
 			}
+			res.json(data);
 		});
 	}
 	else
