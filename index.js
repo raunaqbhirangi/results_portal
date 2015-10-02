@@ -3,6 +3,7 @@ var app = express();
 var http = require('http');
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
+var fs = require('fs');
 
 http.Server(app).listen(8000);
 var connection = mysql.createConnection({
@@ -23,7 +24,11 @@ app.get('/',function(req,res){
 
 app.get('/java.js',function(req,res){
 	res.sendFile(__dirname+'/java.js');
-})
+});
+
+app.get('/login.js',function(req,res){
+	res.sendFile(__dirname+'/login.js');
+});
 
 app.post('/addprizes',function(req,res){
 	var eventid = req.body.eventid;
@@ -32,7 +37,7 @@ app.post('/addprizes',function(req,res){
 	var thirdprize = req.body.thirdprize;
 	var data = {
 		"errorcode":"0",
-		"error":""
+		"error":"Data added Successfully"
 	};
 	var n = 0;
 	var query = "UPDATE results SET "
@@ -92,10 +97,17 @@ app.post('/addprizes',function(req,res){
 		data["error"] = "No data to be added";
 		res.json(data);
 	}
-	/*if(!!eventid)//&&!!firstprize&&!!secondprize&&!!thirdprize)
+});
+
+app.post('/login',function(req,res){
+	var username = req.body.username;
+	var password = req.body.password;
+	var data = {
+		"success":false
+	};
+	if(username == "testing"&&password == "testing")
 	{
-		var query2 = connection.query("UPDATE results SET firstprize=?,secondprize=?,thirdprize=? WHERE eventid=?",[firstprize,secondprize,thirdprize,eventid],function(err,rows,fields){
-			console.log(err);
-		});
-	}*/
+		data.success = true;
+	}
+	res.json(data);
 });

@@ -6,17 +6,36 @@
   	<script type="text/javascript" src="java.js"></script>
 </head>
 <body>
-<script>
-	
-</script>
-	<select id= "eventdrop">
-		<option value = 0>Event Name</option>	
-	</select>
+	<div id="login_page">
+		<div class="userpass">
+			Username:
+			<input type="text" id = "username">
+		</div>
+		<div class="userpass">
+			Password:
+			<input type="text" id = "password">
+		</div>
+		<div class="button">
+			<button id="login">LOGIN</button>
+		</div>
+		<div class="login_errors">
+			Incorrect username or password. Please try again.
+		</div>
+		
+	</div>
+	<div id = "upload_page">
+		<select id= "eventdrop">
+			<option value = 0>Event Name</option>	
+		</select>
 
-	<input type="text" id = "first">
-	<input type="text" id = "second">
-	<input type="text" id = "third">
-	<br>
-	<button id = "submit">Submit</button>
+		<input type="text" id = "first">
+		<input type="text" id = "second">
+		<input type="text" id = "third">
+		<br>
+		<div class="upload_errors">
+		</div>
+		<button id = "submit">Submit</button>	
+	</div>
+	
 </body>
 </html>
