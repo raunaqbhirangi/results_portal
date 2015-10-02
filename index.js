@@ -46,13 +46,11 @@ app.post('/addprizes',function(req,res){
 	{
 		if(!!firstprize.length)
 		{
-			console.log("a1");
 			query = query+"firstprize="+connection.escape(firstprize);
 			n=1;
 		}
 		if(!!secondprize.length)
 		{
-			console.log("a2");
 			if(n==0)
 			{
 				query = query + "secondprize="+connection.escape(secondprize);
@@ -66,8 +64,6 @@ app.post('/addprizes',function(req,res){
 		}
 		if(!!thirdprize.length)
 		{
-			console.log("a3");
-			console.log("a2");
 			if(n==0)
 			{
 				query = query + "thirdprize="+connection.escape(thirdprize);
@@ -80,14 +76,12 @@ app.post('/addprizes',function(req,res){
 			}
 		}
 		query = query + " WHERE eventid="+eventid;
-		console.log(query);
 		connection.query(query,function(err,rows,fields){
 			if(!!err)
 			{
 				console.log(err);
 				data["errorcode"] = 3;
 				data["error"] = err.code;
-				console.log(data);
 				res.json(data);
 			}
 		});
